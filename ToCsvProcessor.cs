@@ -173,18 +173,28 @@ namespace TabulateSmarterTestResults
             ScaleScore,
             ScaleScoreStandardError,
             ScaleScoreAchievementLevel,
+            OverallTheta,
+            OverallThetaStandardError,
             Claim1Score,
             Claim1ScoreStandardError,
             Claim1ScoreAchievementLevel,
+            Claim1Theta,
+            Claim1ThetaStandardError,
             Claim2Score,
             Claim2ScoreStandardError,
             Claim2ScoreAchievementLevel,
+            Claim2Theta,
+            Claim2ThetaStandardError,
             Claim3Score,
             Claim3ScoreStandardError,
             Claim3ScoreAchievementLevel,
+            Claim3Theta,
+            Claim3ThetaStandardError,
             Claim4Score,
             Claim4ScoreStandardError,
-            Claim4ScoreAchievementLevel
+            Claim4ScoreAchievementLevel,
+            Claim4Theta,
+            Claim4ThetaStandardError
         };
         static readonly int AllStudentFieldNamesCount = Enum.GetNames(typeof(AllStudentFieldNames)).Length;
 
@@ -284,22 +294,32 @@ namespace TabulateSmarterTestResults
         static XPathExpression sXp_ScaleScore = XPathExpression.Compile("/TDSReport/Opportunity/Score[@measureOf='Overall' and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@value");
         static XPathExpression sXp_ScaleScoreStandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[@measureOf='Overall' and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@standardError");
         static XPathExpression sXp_ScaleScoreAchievementLevel = XPathExpression.Compile("/TDSReport/Opportunity/Score[@measureOf='Overall' and (@measureLabel='PerformanceLevel' or @measurelabel='PerformanceLevel')]/@value");
+        static XPathExpression sXp_OverallTheta = XPathExpression.Compile("/TDSReport/Opportunity/Score[@measureOf='Overall' and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@value");
+        static XPathExpression sXp_OverallThetaStandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[@measureOf='Overall' and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@standardError");
         // Claim 1 for ELA is labeled "SOCK_R" for math it's labeled "1"
         static XPathExpression sXp_ClaimScore1 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_R' or @measureOf='1' or @measureOf='Claim1') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@value");
         static XPathExpression sXp_ClaimScore1StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_R' or @measureOf='1' or @measureOf='Claim1') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@standardError");
         static XPathExpression sXp_ClaimScore1AchievementLevel = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_R' or @measureOf='1' or @measureOf='Claim1') and (@measureLabel='PerformanceLevel' or @measurelabel='PerformanceLevel')]/@value");
+        static XPathExpression sXp_ClaimTheta1 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_R' or @measureOf='1' or @measureOf='Claim1') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@value");
+        static XPathExpression sXp_ClaimTheta1StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_R' or @measureOf='1' or @measureOf='Claim1') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@standardError");
         // Claim 2 for ELA is labeled "2-W" for math it's labeled "SOCK_2"
         static XPathExpression sXp_ClaimScore2 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='2-W' or @measureOf='SOCK_2' or @measureOf='Claim2') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@value");
         static XPathExpression sXp_ClaimScore2StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='2-W' or @measureOf='SOCK_2' or @measureOf='Claim2') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@standardError");
         static XPathExpression sXp_ClaimScore2AchievementLevel = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='2-W' or @measureOf='SOCK_2' or @measureOf='Claim2') and (@measureLabel='PerformanceLevel' or @measurelabel='PerformanceLevel')]/@value");
+        static XPathExpression sXp_ClaimTheta2 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='2-W' or @measureOf='SOCK_2' or @measureOf='Claim2') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@value");
+        static XPathExpression sXp_ClaimTheta2StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='2-W' or @measureOf='SOCK_2' or @measureOf='Claim2') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@standardError");
         // Claim 3 for ELA is labeled "SOCK_LS" for math it's labeled "3"
         static XPathExpression sXp_ClaimScore3 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_LS' or @measureOf='3' or @measureOf='Claim3') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@value");
         static XPathExpression sXp_ClaimScore3StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_LS' or @measureOf='3' or @measureOf='Claim3') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@standardError");
         static XPathExpression sXp_ClaimScore3AchievementLevel = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_LS' or @measureOf='3' or @measureOf='Claim3') and (@measureLabel='PerformanceLevel' or @measurelabel='PerformanceLevel')]/@value");
+        static XPathExpression sXp_ClaimTheta3 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_LS' or @measureOf='3' or @measureOf='Claim3') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@value");
+        static XPathExpression sXp_ClaimTheta3StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='SOCK_LS' or @measureOf='3' or @measureOf='Claim3') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@standardError");
         // Claim 4 for ELA is labeled "4-CR" for math it doesn't exist
         static XPathExpression sXp_ClaimScore4 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='4-CR' or @measureOf='Claim4') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@value");
         static XPathExpression sXp_ClaimScore4StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='4-CR' or @measureOf='Claim4') and (@measureLabel='ScaleScore' or @measurelabel='ScaleScore')]/@standardError");
         static XPathExpression sXp_ClaimScore4AchievementLevel = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='4-CR' or @measureOf='Claim4') and (@measureLabel='PerformanceLevel' or @measurelabel='PerformanceLevel')]/@value");
+        static XPathExpression sXp_ClaimTheta4 = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='4-CR' or @measureOf='Claim4') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@value");
+        static XPathExpression sXp_ClaimTheta4StandardError = XPathExpression.Compile("/TDSReport/Opportunity/Score[(@measureOf='4-CR' or @measureOf='Claim4') and (@measureLabel='ThetaScore' or @measurelabel='ThetaScore')]/@standardError");
         // Matches all accessibility codes
         static XPathExpression sXP_AccessibilityCodes = XPathExpression.Compile("/TDSReport/Opportunity/Accommodation/@code");
 
@@ -692,11 +712,11 @@ namespace TabulateSmarterTestResults
                 studentFields[(int)AllStudentFieldNames.OpportunityCount] = nav.Eval(sXp_OpportunityCount);
                 studentFields[(int)AllStudentFieldNames.TestSessionId] = nav.Eval(sXp_TestSessionId);
                 studentFields[(int)AllStudentFieldNames.UserAgent] = nav.Eval(sXp_UserAgent);
-                ProcessScoresAll(nav, sXp_ScaleScore, sXp_ScaleScoreStandardError, sXp_ScaleScoreAchievementLevel, studentFields, (int)AllStudentFieldNames.ScaleScore);
-                ProcessScoresAll(nav, sXp_ClaimScore1, sXp_ClaimScore1StandardError, sXp_ClaimScore1AchievementLevel, studentFields, (int)AllStudentFieldNames.Claim1Score);
-                ProcessScoresAll(nav, sXp_ClaimScore2, sXp_ClaimScore2StandardError, sXp_ClaimScore2AchievementLevel, studentFields, (int)AllStudentFieldNames.Claim2Score);
-                ProcessScoresAll(nav, sXp_ClaimScore3, sXp_ClaimScore3StandardError, sXp_ClaimScore3AchievementLevel, studentFields, (int)AllStudentFieldNames.Claim3Score);
-                ProcessScoresAll(nav, sXp_ClaimScore4, sXp_ClaimScore4StandardError, sXp_ClaimScore4AchievementLevel, studentFields, (int)AllStudentFieldNames.Claim4Score);
+                ProcessScoresAll(nav, sXp_ScaleScore, sXp_ScaleScoreStandardError, sXp_ScaleScoreAchievementLevel, sXp_OverallTheta, sXp_OverallThetaStandardError, studentFields, (int)AllStudentFieldNames.ScaleScore);
+                ProcessScoresAll(nav, sXp_ClaimScore1, sXp_ClaimScore1StandardError, sXp_ClaimScore1AchievementLevel, sXp_ClaimTheta1, sXp_ClaimTheta1StandardError, studentFields, (int)AllStudentFieldNames.Claim1Score);
+                ProcessScoresAll(nav, sXp_ClaimScore2, sXp_ClaimScore2StandardError, sXp_ClaimScore2AchievementLevel, sXp_ClaimTheta2, sXp_ClaimTheta2StandardError, studentFields, (int)AllStudentFieldNames.Claim2Score);
+                ProcessScoresAll(nav, sXp_ClaimScore3, sXp_ClaimScore3StandardError, sXp_ClaimScore3AchievementLevel, sXp_ClaimTheta3, sXp_ClaimTheta3StandardError, studentFields, (int)AllStudentFieldNames.Claim3Score);
+                ProcessScoresAll(nav, sXp_ClaimScore4, sXp_ClaimScore4StandardError, sXp_ClaimScore4AchievementLevel, sXp_ClaimTheta4, sXp_ClaimTheta4StandardError, studentFields, (int)AllStudentFieldNames.Claim4Score);
             }
 
             // Write one line to the CSV
@@ -927,15 +947,19 @@ namespace TabulateSmarterTestResults
         }
 
         static void ProcessScoresAll(XPathNavigator nav, XPathExpression xp_ScaleScore, XPathExpression xp_StdErr,
-            XPathExpression xp_PerfLvl, string[] fields, int index)
+            XPathExpression xp_PerfLvl, XPathExpression xp_Theta, XPathExpression xp_ThetaStdErr, string[] fields, int index)
         {
             string scaleScore = nav.Eval(xp_ScaleScore);
             string stdErr = nav.Eval(xp_StdErr);
             string perfLvl = nav.Eval(xp_PerfLvl);
+            string theta = nav.Eval(xp_Theta);
+            string thetaStdErr = nav.Eval(xp_ThetaStdErr);
 
             fields[index] = scaleScore;
             fields[index + 1] = stdErr;
             fields[index + 2] = perfLvl;
+            fields[index + 3] = theta;
+            fields[index + 4] = thetaStdErr;
         }
 
         // Take the floor of a decimal number string
